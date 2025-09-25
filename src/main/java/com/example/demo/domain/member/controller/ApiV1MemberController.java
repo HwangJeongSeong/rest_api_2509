@@ -23,11 +23,11 @@ import java.util.Map;
 public class ApiV1MemberController {
     private final MemberService memberService;
     private final JwtProvider jwtProvider;
-
+    
     @PostMapping("/join")
     public RsData<MemberResponse> join (@Valid @RequestBody MemberRequest memberRequest) {
         Member member = memberService.join(memberRequest.getUsername(), memberRequest.getPassword());
-
+        
         return RsData.of("200", "회원가입이 완료되었습니다.", new MemberResponse(member));
     }
 
@@ -43,7 +43,6 @@ public class ApiV1MemberController {
         cookie.setPath("/");
         cookie.setMaxAge(60 * 60);
         res.addCookie(cookie);
-
 
         return RsData.of("200", "토큰 발급 성공 : " + accessToken, new MemberResponse(member));
     }
