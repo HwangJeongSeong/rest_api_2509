@@ -15,6 +15,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @RequiredArgsConstructor
 public class ApiSecurityConfig {
     private final JwtAuthorizationFilter jwtAuthorizationFilter;
+
     @Bean
     SecurityFilterChain apifilterChain(HttpSecurity http) throws Exception {
         http
@@ -41,7 +42,7 @@ public class ApiSecurityConfig {
                         sessionManagement -> sessionManagement.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 )
                 .addFilterBefore(
-                        jwtAuthorizationFilter, //엑세스 토큰을 이용한 로그인 처리
+                        jwtAuthorizationFilter, // 엑세스 토큰을 이용한 로그인 처리
                         UsernamePasswordAuthenticationFilter.class
                 )
         ;
